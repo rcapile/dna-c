@@ -1,7 +1,7 @@
 Busca de seqüências em cadeias de DNA
 =====================================
 
-Este trabalho foi avaliado o tempo de busca de uma seqüência de 10 aminoácidos em uma cadeia de DNA com 100.000 aminoácidos. É feita , basicamente, uma comparação entre os softwares MPI e Treadmarks. A estratégia de paralelização é a mesma para ambos os modelos.
+Este trabalho avalia o tempo de busca de uma seqüência de 10 aminoácidos em uma cadeia de DNA com 100.000 aminoácidos. É feita uma comparação com o MPI.
 
 Nós queremos mostrar a eficiência da paralelização na procura de seqüências de aminoácidos em uma cadeia de DNA. A cadeia normal de DNA possui milhões de aminoácidos. Desse modo o paralelização seria uma soluções excelente para os algoritmos de busca serial, reduzindo bastante o tempo de procura.
 
@@ -13,38 +13,38 @@ O Algoritmo que utilizamos foi desenvolvido especialmente para este trabalho par
 ```C
 int buscaDNA(char *dna, char *seq)
 {
-	int i, j, k, l, gap;
-	int seqlen, fim;
-	k = 0;
-	fim = strlen(dna);
-	seqlen = strlen(seq);
-	for (i = 0; i < fim; i++)
-	{
-		if (dna[i] == seq[0])
-		{
-			j = 1;
-			gap = 0;
-			l = 0;
-			while ((j < seqlen) && (gap <= GAP_MAX))
-			{
-				if (dna[i + j + gap] == seq[j])
-				{
-					j++;
-				}
-				else
-				{
-					gap++;
-				}
-				l++;
-			}
-			if (j == seqlen)
-			{
-				k++;
-			}
-		}
-	}
+    int i, j, k, l, gap;
+    int seqlen, fim;
+    k = 0;
+    fim = strlen(dna);
+    seqlen = strlen(seq);
+    for (i = 0; i < fim; i++)
+    {
+        if (dna[i] == seq[0])
+        {
+            j = 1;
+            gap = 0;
+            l = 0;
+            while ((j < seqlen) && (gap <= GAP_MAX))
+            {
+                if (dna[i + j + gap] == seq[j])
+                {
+                    j++;
+                }
+                else
+                {
+                    gap++;
+                }
+                l++;
+            }
+            if (j == seqlen)
+            {
+                k++;
+            }
+        }
+    }
 
-	return k; /*retorna o numero de sequencias encontradas*/
+    return k; /*retorna o numero de sequencias encontradas*/
 }
 ```
 
