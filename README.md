@@ -11,24 +11,39 @@ ALGORITMO
 O Algoritmo que utilizamos foi desenvolvido especialmente para este trabalho para achar uma seqüência de DNA dentro de uma cadeia de DNA. Dado uma cadeia de DNA a seqüência e procurada de forma que possa haver espaços entre os aminoácidos do DNA (gap). Isto e com gap=1 procurando pela seqüência ACCA podemos ter as seguintes opções: A_CCA,AC_CA, AC_CA ou ACC_A. O melhor caso e quando existe apenas as seqüências sem gap (ACCA) e o pior caso e quando não existir a seqüência. Este algoritmo não distingue a posição da dos aminoácidos na seqüência, apenas o numero do gap. O algoritmo da busca é o seguinte:
 
 ```C
-int buscaDNA(char *dna, char *seq){
-	int i,j,k,l,gap;
-	int seqlen,fim;
-	k=0;
+int buscaDNA(char *dna, char *seq)
+{
+	int i, j, k, l, gap;
+	int seqlen, fim;
+	k = 0;
 	fim = strlen(dna);
 	seqlen = strlen(seq);
-	for (i=0;i<fim;i++)  {
-		if (dna[i] == seq[0])  {
-			j=1;gap=0;l=0;
-			while ((j<seqlen)&& (gap<=GAP_MAX)) {
-				if (dna[i+j+gap] == seq[j]) j++;
-					else gap++;
+	for (i = 0; i < fim; i++)
+	{
+		if (dna[i] == seq[0])
+		{
+			j = 1;
+			gap = 0;
+			l = 0;
+			while ((j < seqlen) && (gap <= GAP_MAX))
+			{
+				if (dna[i + j + gap] == seq[j])
+				{
+					j++;
+				}
+				else
+				{
+					gap++;
+				}
 				l++;
 			}
-			if (j==seqlen) 	k++;
-		} 
+			if (j == seqlen)
+			{
+				k++;
+			}
+		}
 	}
-	
+
 	return k; /*retorna o numero de sequencias encontradas*/
 }
 ```
